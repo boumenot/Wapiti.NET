@@ -1,0 +1,10 @@
+framework: >= net46
+source https://www.nuget.org/api/v2
+
+nuget approvaltests
+nuget FAKE
+nuget FluentAssertions
+nuget xunit
+nuget xunit.runner.console
+nuget xunit.runner.visualstudio >= 2.0 version_in_path: true
+nuget xunit.runners
