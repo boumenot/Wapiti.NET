@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/bsfww7gaedtoiq4p?svg=true)](https://ci.appveyor.com/project/boumenot/wapiti-net)
 # Wapiti.NET
 
 C# Bindings for Wapiti.  Bindings are based on my Wapiti
