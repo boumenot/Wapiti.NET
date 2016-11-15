@@ -1,18 +1,7 @@
-version: 0.0.1.{build}
-
 image: Visual Studio 2015
 
 init:
   - git config --global core.autocrlf input
-
-skip_commits:
-  files:
-    - '**/*.md'
-
-build_script:
-  - build.cmd BuildApp
-  - build.cmd UnitTests
-  - ps: (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\xunit2.xml))
 
 matrix:
   fast_finish: true
@@ -24,10 +13,30 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 
-configuration: Debug
-platform: x64
-
 test: off
+
+skip_commits:
+  files:
+    - '**/*.md'
+
+before_build:
+  - if "%APPVEYOR_REPO_TAG%"=="true" (set BUILD_MODE=Release) else (set BUILD_MODE=Debug)
+
+build_script:
+  - build.cmd -ev buildMode %BUILD_MODE%
+  - ps: (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\xunit2.xml))
+
+deploy:
+  release: $(APPVEYOR_REPO_TAG_NAME)
+  provider: GitHub
+  auth_token:
+    secure: XUHs7rAfk3ymN4Rn1ORzRZlZynQDMj3T2CxzaKusU/Zw6SYLBS8wSxt5y12+onZX
+  artifact: NuGet/Wapiti.x64.$(APPVEYOR_REPO_TAG_NAME).zip
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true
 
 # on_finish:
 #   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
