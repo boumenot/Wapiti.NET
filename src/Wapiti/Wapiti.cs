@@ -27,7 +27,7 @@ namespace Wapiti
         {
             if (IntPtr.Size != 8)
             {
-                const string message = "Wapiti.NET only support 64-bit processes!";
+                const string message = "Wapiti.NET only supports 64-bit processes!";
                 throw new ArgumentOutOfRangeException(message);
             }
 
