@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -6,6 +8,39 @@ namespace Wapiti
 {
     public class Wapiti
     {
+        static Wapiti()
+        {
+            Wapiti.SetPathForNativeDllResolution();
+        }
+
+        private static string GetExecutingAssemblyPath()
+        {
+            var assemblyFullName = new Uri(Assembly.GetExecutingAssembly().EscapedCodeBase).LocalPath;
+            var assemblyPath = Path.GetDirectoryName(assemblyFullName);
+
+            return assemblyPath;
+        }
+
+        private static void SetPathForNativeDllResolution()
+        {
+            if (IntPtr.Size != 8)
+            {
+                const string message = "Wapiti.NET only support 64-bit processes!";
+                throw new ArgumentOutOfRangeException(message);
+            }
+
+            var assemblyPath = Wapiti.GetExecutingAssemblyPath();
+            var nativeDllPath = Path.Combine(assemblyPath, "native", "x64");
+
+            const string PATH = "PATH";
+
+            var newPath = string.Format("{0};{1}",
+                nativeDllPath,
+                Environment.GetEnvironmentVariable(PATH));
+
+            Environment.SetEnvironmentVariable(PATH, newPath);
+        }
+
         private Wapiti() {}
 
         public string Label(WapitiModel model, string path)
