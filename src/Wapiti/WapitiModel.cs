@@ -1,42 +1,54 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Wapiti
 {
     public class WapitiModel : IDisposable
     {
-        private WapitiModel(IntPtr model)
+        internal WapitiModel(IntPtr model)
         {
             this.Model = model;
         }
 
         internal IntPtr Model { get; private set; }
 
-        public static WapitiModel Load(string path)
+        public string Label(string path)
         {
             using (var stream = File.OpenRead(path))
             {
-                return WapitiModel.Load(stream);
+                return this.Label(stream);
             }
         }
 
-        public static WapitiModel Load(Stream stream)
+        public string Label(Stream stream)
         {
             var lines = new StreamReader(stream).ReadAllLines();
-            return WapitiModel.Load(lines);
+            return this.Label(lines);
         }
 
-        public static WapitiModel Load(string[] lines)
+        public string Label(string[] lines)
         {
             int i = 0;
             WapitiNative.gets_cb gets_cb = () => i >= lines.Length ? null : lines[i++];
 
-            var iol = WapitiNative.iol_new3(gets_cb, null);
-            var rdr = WapitiNative.rdr_new(iol, true);
-            var mdl = WapitiNative.mdl_new(rdr);
+            var sb = new StringBuilder();
+            WapitiNative.write_cb write_cb = (ptr, length) =>
+            {
+                byte[] strbuf = new byte[length];
+                Marshal.Copy(ptr, strbuf, 0, length);
+                var data = Encoding.UTF8.GetString(strbuf);
 
-            WapitiNative.mdl_load(mdl);
-            return new WapitiModel(mdl);
+                WapitiNative.xfree(ptr);
+                sb.Append(data);
+            };
+
+            var iol = WapitiNative.iol_new3(gets_cb, write_cb);
+            WapitiNative.tag_label(this.Model, iol);
+            WapitiNative.iol_free(iol);
+
+            return sb.ToString();
         }
 
         public void Dispose()

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Wapiti
 {
@@ -33,6 +31,8 @@ namespace Wapiti
 
             var assemblyPath = Wapiti.GetExecutingAssemblyPath();
             Wapiti.SetPathForNativeDllResolution(assemblyPath, "native", "x64");
+            // Support for NCrunch
+            Wapiti.SetPathForNativeDllResolution(assemblyPath, "..", "lib", "native", "x64");
             // Support for LINQPad
             Wapiti.SetPathForNativeDllResolution(assemblyPath, "..", "..", "native", "x64");
         }
@@ -57,46 +57,31 @@ namespace Wapiti
 
         private Wapiti() {}
 
-        public string Label(WapitiModel model, string path)
+        public static WapitiModel Load(string path)
         {
             using (var stream = File.OpenRead(path))
             {
-                return this.Label(model, stream);
+                return Wapiti.Load(stream);
             }
         }
 
-        public string Label(WapitiModel model, Stream stream)
+        public static WapitiModel Load(Stream stream)
         {
             var lines = new StreamReader(stream).ReadAllLines();
-            return this.Label(model, lines);
+            return Wapiti.Load(lines);
         }
 
-        public string Label(WapitiModel model, string[] lines)
+        public static WapitiModel Load(string[] lines)
         {
             int i = 0;
             WapitiNative.gets_cb gets_cb = () => i >= lines.Length ? null : lines[i++];
 
-            var sb = new StringBuilder();
-            WapitiNative.write_cb write_cb = (ptr, length) =>
-            {
-                byte[] strbuf = new byte[length];
-                Marshal.Copy(ptr, strbuf, 0, length);
-                var data = Encoding.UTF8.GetString(strbuf);
+            var iol = WapitiNative.iol_new3(gets_cb, null);
+            var rdr = WapitiNative.rdr_new(iol, true);
+            var mdl = WapitiNative.mdl_new(rdr);
 
-                WapitiNative.xfree(ptr);
-                sb.Append(data);
-            };
-
-            var iol = WapitiNative.iol_new3(gets_cb, write_cb);
-            WapitiNative.tag_label(model.Model, iol);
-            WapitiNative.iol_free(iol);
-
-            return sb.ToString();
-        }
-
-        public static Wapiti Create()
-        {
-            return new Wapiti();
+            WapitiNative.mdl_load(mdl);
+            return new WapitiModel(mdl);
         }
     }
 }

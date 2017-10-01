@@ -69,11 +69,9 @@ namespace Wapiti.Test
 
         private void ApproveModel(string[] lines, string path)
         {
-            using (var model = WapitiModel.Load(path))
+            using (var testSubject = Wapiti.Load(path))
             {
-                var testSubject = Wapiti.Create();
-                var result = testSubject.Label(model, lines);
-
+                var result = testSubject.Label(lines);
                 Approvals.Verify(result);
             }
         }
