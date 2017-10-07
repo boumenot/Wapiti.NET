@@ -30,11 +30,15 @@
     <Compile Include="Defaults.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Opt.cs" />
+    <Compile Include="OptMode.cs" />
+    <Compile Include="TrainAlgo.cs" />
+    <Compile Include="TrainOpt.LimitedMemoryBfgs.cs" />
+    <Compile Include="TrainType.cs" />
     <Compile Include="UTF8Marshaler.cs" />
     <Compile Include="Wapiti.cs" />
     <Compile Include="WapitiModel.cs" />
     <Compile Include="WapitiNative.cs" />
-    <Compile Include="WapitiOpt.cs" />
+    <Compile Include="TrainOpt.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

@@ -19,8 +19,9 @@
     <Compile Include="..\..\build\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Crap.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="OptTest.cs" />
+    <Compile Include="TrainOpt.LimitedMemoryBgfsTest.cs" />
     <Compile Include="WapitiTest.cs" />
   </ItemGroup>
   <ItemGroup>
