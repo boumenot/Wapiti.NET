@@ -27,11 +27,14 @@
     <Compile Include="..\..\build\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Defaults.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Opt.cs" />
     <Compile Include="UTF8Marshaler.cs" />
     <Compile Include="Wapiti.cs" />
     <Compile Include="WapitiModel.cs" />
     <Compile Include="WapitiNative.cs" />
+    <Compile Include="WapitiOpt.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
