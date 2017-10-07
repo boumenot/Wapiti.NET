@@ -11,7 +11,7 @@ namespace Wapiti
 
         [Description("sgd-l1")]
         // https://en.wikipedia.org/wiki/Stochastic_gradient_descent
-        StochasticGradientDescen = 1,
+        StochasticGradientDescent = 1,
 
         [Description("bcd")]
         // https://en.wikipedia.org/wiki/Coordinate_descent

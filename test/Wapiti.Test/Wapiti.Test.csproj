@@ -21,6 +21,7 @@
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="OptTest.cs" />
+    <Compile Include="TrainOpt.StochasticGradientDescentTest.cs" />
     <Compile Include="TrainOpt.LimitedMemoryBgfsTest.cs" />
     <Compile Include="WapitiTest.cs" />
   </ItemGroup>

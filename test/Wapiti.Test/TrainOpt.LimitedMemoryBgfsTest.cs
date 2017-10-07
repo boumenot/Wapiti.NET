@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Wapiti.Test
 {
-    public class TrainOptTest
+    public partial class TrainOptTest
     {
         [Fact]
         public void LimitedMemoryBgfsDefaults()
