@@ -21,6 +21,7 @@
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="OptTest.cs" />
+    <Compile Include="TrainOptTest.cs" />
     <Compile Include="TrainOpt.ResilientPropagationOptimizerNegativeTest.cs" />
     <Compile Include="TrainOpt.ResilientPropagationOptimizerPositiveTest.cs" />
     <Compile Include="TrainOpt.ResilientPropagationOptimizerTest.cs" />
