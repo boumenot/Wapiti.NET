@@ -9,14 +9,14 @@ namespace Wapiti.Test
         public void BlockwiseCoordinatesDescentDefaults()
         {
             var testSubject = TrainBlockwiseCoordinatesDescentOpt.Train().Get();
-            testSubject.AssertDefaultTrains(TrainType.ConditionalRandomFields, TrainAlgo.StochasticGradientDescent);
+            testSubject.AssertDefaultTrains(TrainType.ConditionalRandomFields, TrainAlgo.BlockwiseCoordinatesDescent);
         }
 
         [Fact]
         public void BlockwiseCoordinatesDescentCrf()
         {
             var testSubject = TrainBlockwiseCoordinatesDescentOpt.Train().Get();
-            testSubject.AssertDefaultTrains(TrainType.ConditionalRandomFields, TrainAlgo.StochasticGradientDescent);
+            testSubject.AssertDefaultTrains(TrainType.ConditionalRandomFields, TrainAlgo.BlockwiseCoordinatesDescent);
         }
 
         [Fact]

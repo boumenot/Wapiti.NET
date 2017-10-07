@@ -3,7 +3,7 @@
     public sealed class TrainBlockwiseCoordinatesDescentOpt : TrainOpt
     {
         private TrainBlockwiseCoordinatesDescentOpt(TrainType trainType)
-            : base(trainType, TrainAlgo.StochasticGradientDescent)
+            : base(trainType, TrainAlgo.BlockwiseCoordinatesDescent)
         {
         }
 

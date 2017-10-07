@@ -33,6 +33,7 @@
     <Compile Include="OptMode.cs" />
     <Compile Include="TrainAlgo.cs" />
     <Compile Include="TrainOpt.BlockwiseCoordinatesDescent.cs" />
+    <Compile Include="TrainOpt.ResilientPropagationOptimizer.cs" />
     <Compile Include="TrainOpt.StochasticGradientDescent.cs" />
     <Compile Include="TrainOpt.LimitedMemoryBfgs.cs" />
     <Compile Include="TrainType.cs" />
