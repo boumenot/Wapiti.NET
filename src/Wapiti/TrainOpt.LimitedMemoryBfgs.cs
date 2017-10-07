@@ -6,15 +6,6 @@
         private TrainLimitedMemoryBfgsOpt(TrainType trainType)
             : base(trainType, TrainAlgo.LimitedMemoryBfgs)
         {
-            //if (trainAlgo == TrainAlgo.BlockwiseCoordinatesDescent && trainType == TrainType.MaximumEntropyModel)
-            //{
-            //    throw new ArgumentException("Blockwise Coordinates Descent is not supported for training with Maximum Entropy Model.");
-            //}
-
-            //if (trainAlgo == TrainAlgo.BlockwiseCoordinatesDescent && trainType == TrainType.MaximumEntropyMarkovModel)
-            //{
-            //    throw new ArgumentException("Blockwise Coordinates Descent is not supported for training with Maximum Entropy Markov Model.");
-            //}
         }
 
         public TrainLimitedMemoryBfgsOpt SetClipGradient()
