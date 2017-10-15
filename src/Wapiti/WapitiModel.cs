@@ -44,9 +44,9 @@ namespace Wapiti
                 sb.Append(data);
             };
 
-            var iol = WapitiNative.iol_new3(gets_cb, write_cb);
+            var iol = WapitiNative.iol_new_interop(gets_cb, write_cb);
             WapitiNative.tag_label(this.Model, iol);
-            WapitiNative.iol_free(iol);
+            WapitiNative.iol_free_interop(iol);
 
             return sb.ToString();
         }

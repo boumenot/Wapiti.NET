@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Wapiti
 {
@@ -76,7 +78,7 @@ namespace Wapiti
             int i = 0;
             WapitiNative.gets_cb gets_cb = () => i >= lines.Length ? null : lines[i++];
 
-            var iol = WapitiNative.iol_new3(gets_cb, null);
+            var iol = WapitiNative.iol_new_interop(gets_cb, null);
             var rdr = WapitiNative.rdr_new(iol, true);
             var mdl = WapitiNative.mdl_new(rdr);
 

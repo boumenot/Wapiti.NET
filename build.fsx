@@ -5,7 +5,7 @@ open Fake
 open Fake.ReleaseNotesHelper
 open Fake.Testing
 
-let wapitiUrl = "https://github.com/boumenot/Wapiti/releases/download/2.0.0/wapiti-llvm-x64.zip"
+let wapitiUrl = "https://github.com/boumenot/Wapiti/releases/download/2.1.0/wapiti-msvc-x64-release.zip"
 let nugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 
 let authors = ["Christopher Boumenot"]
@@ -98,7 +98,7 @@ Target "NuGet" (fun _ ->
             AccessKey = getBuildParamOrDefault "nugetkey" ""
             Publish = hasBuildParam "nugetkey"
             Files = [ (@"..\nuget\build\wapiti.x64.props",                Some @"build\wapiti.x64.props",   None)
-                      (@"..\wapiti.native\wapiti.dll",                    Some @"native\x64\libwapiti.dll", None)
+                      (@"..\wapiti.native\libwapiti.dll",                 Some @"native\x64\libwapiti.dll", None)
                       (@"..\src\Wapiti\bin" @@ buildMode @@ "Wapiti.dll", Some @"lib\net45",                None) ] })
         ("nuget/" + project + ".nuspec")
 )
