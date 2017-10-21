@@ -21,7 +21,15 @@ namespace Wapiti
             [MarshalAs(UnmanagedType.FunctionPtr)] write_cb write);
 
         [DllImport(DllName)]
+        public static extern IntPtr iol_new_interop(
+            [MarshalAs(UnmanagedType.FunctionPtr)] gets_cb gets,
+            [MarshalAs(UnmanagedType.FunctionPtr)] write_cb write);
+
+        [DllImport(DllName)]
         public static extern void iol_free(IntPtr iol);
+        
+        [DllImport(DllName)]
+        public static extern void iol_free_interop(IntPtr iol);
 
         [DllImport(DllName)]
         public static extern IntPtr rdr_new(
@@ -42,5 +50,8 @@ namespace Wapiti
 
         [DllImport(DllName)]
         public static extern void tag_label(IntPtr mdl, IntPtr iol);
+
+        [DllImport(DllName)]
+        public static extern int train(IntPtr opt, IntPtr iol_model, IntPtr iol_pattern);
     }
 }

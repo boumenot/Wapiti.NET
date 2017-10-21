@@ -2,6 +2,10 @@
 
 namespace Wapiti
 {
+    // NOTE(boumenot): this works, but it seems a little fragile.  
+    // TODO(boumenot): make this better.
+    //  1. Consider moving the sub-structs to the end of this struct.
+    //  2. Determine the best alignment to use; make it explicit
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct Opt
     {
@@ -41,27 +45,35 @@ namespace Wapiti
         public double StopEps;
 
         // Options specific to L-BFGS
+        // struct lbfgs {
         [MarshalAs(UnmanagedType.U1)]
         public bool Clip;
         [MarshalAs(UnmanagedType.U4)]
         public uint HistSz;
         [MarshalAs(UnmanagedType.U4)]
         public uint MaxLs;
+        // }
 
         // Options specific to SGD-L1
+        // struct sgdl1 {
         public double Eta0;
         public double Alpha;
+        // }
 
         // Options specific to BCD
+        // struct bcd {
         public double Kappa;
+        // }
 
         // Options specific to RPROP
+        // struct __attribute__(packed) rprop {
         public double StpMin;
         public double StpMax;
         public double StpInc;
         public double StpDec;
         [MarshalAs(UnmanagedType.U1)]
         public bool CutOff;
+        //  }
 
         // Options for labelling
         [MarshalAs(UnmanagedType.U1)]

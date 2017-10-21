@@ -42,12 +42,13 @@
     <Compile Include="WapitiModel.cs" />
     <Compile Include="WapitiNative.cs" />
     <Compile Include="TrainOpt.cs" />
+    <Compile Include="WapitiTrainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\wapiti.native\wapiti.dll">
+    <Content Include="..\..\wapiti.native\libwapiti.dll">
       <Link>libwapiti.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

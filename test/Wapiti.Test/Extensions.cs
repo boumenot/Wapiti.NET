@@ -1,16 +1,25 @@
-﻿using System;
+﻿using System.IO;
+using System.Reflection;
 using FluentAssertions;
 
 namespace Wapiti.Test
 {
     public static class Extensions
     {
+        public static Stream GetResourceStream(this string s)
+        {
+            var path = $"Wapiti.Test.content.{s.Replace('/', '.')}";
+            return Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
+        }
+
         public static void AssertDefaults(this Opt testSubject)
         {
             testSubject.Input.Should().BeNull();
             testSubject.Output.Should().BeNull();
 
             testSubject.MaxEnt.Should().BeFalse();
+
+            testSubject.MaxIter.Should().Be(0);
 
             testSubject.Pattern.Should().BeNull();
             testSubject.Model.Should().BeNull();
@@ -60,8 +69,8 @@ namespace Wapiti.Test
             AssertDefaults(testSubject);
             testSubject.Mode.Should().Be((int)OptMode.Train);
 
-            testSubject.Type.Should().Be(trainType.ToString());
-            testSubject.Algo.Should().Be(trainAlgo.ToString());
+            testSubject.Type.Should().Be(trainType.GetDescription());
+            testSubject.Algo.Should().Be(trainAlgo.GetDescription());
         }
     }
 }

@@ -28,6 +28,7 @@
     <Compile Include="TrainOpt.BlockwiseCoordinatesDescentTest.cs" />
     <Compile Include="TrainOpt.StochasticGradientDescentTest.cs" />
     <Compile Include="TrainOpt.LimitedMemoryBgfsTest.cs" />
+    <Compile Include="TrainTest.cs" />
     <Compile Include="WapitiTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +38,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="content\date.template.txt" />
     <None Include="..\..\models\grobid\date.model.wapiti">
       <Link>date.model.wapiti</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -44,6 +46,8 @@
     <None Include="Wapiti.Test.csproj.paket.references" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="content\date.training.txt" />
+    <Content Include="TrainTest.GrobidDateModelTest.approved.txt" />
     <Content Include="WapitiTest.GrobidModelDate00.approved.txt" />
     <Content Include="WapitiTest.GrobidModelDate01.approved.txt" />
     <Content Include="WapitiTest.GrobidModelDate02.approved.txt" />
